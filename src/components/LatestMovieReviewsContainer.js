@@ -11,30 +11,35 @@ class LatestMovieReviewsContainer extends Component {
   constructor() {
     super()
     this.state = {
-      reviews = fetchReviews()
+      reviews: []
     }
   }
 
+  componentWillMount() {
+    this.fetchReviews();
+  }
+
   fetchReviews = () => {
-    
+    var reviews = [];
     fetch(URL)
 	    .then(function(response) {
 		     if (response.status >= 400) { throw new Error("Bad response from server"); }
 		     return response.json();
 	    })
 	    .then(function(resp) {
-        var reviews = resp['results'].map(r => {
+        var reviews_arr = resp['results'].map(r => {
           var review = {movie_name: r["display_title"],
             link: r["link"], summary: r["summary_short"]}
           return review;
         })
-        this.setState({ reviews })
+        reviews = reviews_arr;
       });
+      this.setState({ reviews: reviews })
   }
 
-  render {
+  render() {
     return (
-      <div class="latest-movie-reviews">
+      <div className="latest-movie-reviews">
         <h1>Latest Movie Reviews</h1>
         <MovieReviews reviews={this.state.reviews} />
       </div>
