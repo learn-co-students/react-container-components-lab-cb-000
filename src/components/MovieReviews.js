@@ -1,34 +1,17 @@
 import React from 'react';
-const Review = ({
-  headline,
-  byline,
-  link,
-  summary_short
-}) => {
-  return (
-    <div
-      key={headline}
-      className="review"
-    >
-      <header>
-        <a
-          className="review-link"
-          href={link.url}
-        >
-          {headline}
-        </a>
-        <br/>
-        <span className="author">{byline}</span>
-      </header>
-      <blockquote>{summary_short}</blockquote>
-    </div>
-  );
-};
 
-const MovieReviews = ({ reviews }) => <div className="review-list">{reviews.map(Review)}</div>;
+const MovieReviews = (props) =>  {
+  const reviews = props.reviews.map(review => {
+    return (
+      <div key={review.headline} className="review">
+        <p><a href={review.link.url}>{review.headline}</a></p>
+        <p>{review.byline}</p>
+        <p>{review.summary_short}</p>
+      </div>
+    )
+  });
+  return <div className="review-list">{reviews}</div>
+}
 
-MovieReviews.defaultProps = {
-  reviews: []
-};
 
 export default MovieReviews;
