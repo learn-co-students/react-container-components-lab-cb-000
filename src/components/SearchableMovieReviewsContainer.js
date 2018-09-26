@@ -19,10 +19,11 @@ class SearchableMovieReviewsContainer extends {
     const searchTerm=  handleInput
 
     fetchReviews(searchTerm)
+    e.preventDefault();
   }
 
-  fetchReviews = (searchTerm="") => {
-    const FULL_URL = URL + `?query=${searchTerm}`
+  fetchReviews = (searchTerm=null) => {
+    const FULL_URL = !!searchTerm ? URL + `?query=${searchTerm}` : URL
     //fetch reviews and manipulate them into tidy arrays
     //store those array in this.state.reviews:
     fetch(FULL_URL)
@@ -30,8 +31,12 @@ class SearchableMovieReviewsContainer extends {
 		     if (response.status >= 400) { throw new Error("Bad response from server"); }
 		     return response.json();
 	    })
-	    .then(function(json) {
-		     var reviews = json.map(r => )
+	    .then(function(resp) {
+		     var reviews = resp['results'].map(r => {
+           var review = {movie_name: r["display_title"],
+             link: r["link"], summary: r["summary_short"]}
+           return review;
+         })
          this.setState({ reviews })
       });
   }

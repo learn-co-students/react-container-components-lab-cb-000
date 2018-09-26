@@ -23,8 +23,8 @@ class LatestMovieReviewsContainer extends Component {
 		     if (response.status >= 400) { throw new Error("Bad response from server"); }
 		     return response.json();
 	    })
-	    .then(function(json) {
-		     var reviews = json.map(r => )
+	    .then(function(resp) {
+		     var reviews = resp['results'].map(r => )
          this.setState({ reviews })
       });
   }
