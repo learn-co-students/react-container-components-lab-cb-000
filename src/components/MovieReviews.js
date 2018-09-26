@@ -1,28 +1,34 @@
 import React from 'react';
-
-const MovieReviews = (props) => {
-  console.log("MovieReviews props:");
-  console.log(props);
-  // [{movie_name: "Latest Google", summary: "It's not actually a movie ...", link: 'https://www.google.com'}]
-  const reviews = props.reviews.map(r => {
-   return (
-     <div className="review">
-        <h3>Movie</h3>
-        <p>{r.movie_name}</p>
-        <h3>Brief Summary</h3>
-        <p>{r.summary}</p>
-        <p>View at <a target="_blank" href={r.link}>New York Times Website</a></p>
-     </div>
-   )
-  })
-
+const Review = ({
+  headline,
+  byline,
+  link,
+  summary_short
+}) => {
   return (
-   <div className="review-list">
-    {reviews}
-   </div>
-  )
-}
+    <div
+      key={headline}
+      className="review"
+    >
+      <header>
+        <a
+          className="review-link"
+          href={link.url}
+        >
+          {headline}
+        </a>
+        <br/>
+        <span className="author">{byline}</span>
+      </header>
+      <blockquote>{summary_short}</blockquote>
+    </div>
+  );
+};
 
-MovieReviews.defaultProps = {reviews:[{movie_name: "Latest Google", summary: "It's not actually a movie ...", link: 'https://www.google.com'}]};
+const MovieReviews = ({ reviews }) => <div className="review-list">{reviews.map(Review)}</div>;
 
-export default MovieReviews
+MovieReviews.defaultProps = {
+  reviews: []
+};
+
+export default MovieReviews;
