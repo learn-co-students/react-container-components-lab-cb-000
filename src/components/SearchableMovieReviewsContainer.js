@@ -11,14 +11,20 @@ class SearchableMovieReviewsContainer extends {
   constructor() {
     super()
     this.state = {
-      reviews: []
+      reviews: [],
+      searchTerm: null
     }
   }
 
-  handleSearch = e => {
-    const searchTerm=  handleInput
+  handleSearchTermChange = e => {
+    this.setState({
+      searchTerm: e.target.value
+    })
+  }
 
-    fetchReviews(searchTerm)
+  handleSubmit = e => {
+    const searchTerm = this.state.searchTerm;
+    fetchReviews(searchTerm);
     e.preventDefault();
   }
 
@@ -45,8 +51,8 @@ class SearchableMovieReviewsContainer extends {
     return (
       <div class="searchable-movie-reviews">
         <h1>Search Movie Reviews</h1>
-        <form onSubmit={this.handleSearch}>
-          <input type="text" />
+        <form onSubmit={this.handleSubmit}>
+          <input type="text" onChange={this.handleSearchTermChange} />
           <input type="submit" />
         </form>
         <MovieReviews reviews={this.state.reviews} />

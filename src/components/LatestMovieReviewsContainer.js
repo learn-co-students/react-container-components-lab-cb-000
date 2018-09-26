@@ -24,8 +24,12 @@ class LatestMovieReviewsContainer extends Component {
 		     return response.json();
 	    })
 	    .then(function(resp) {
-		     var reviews = resp['results'].map(r => )
-         this.setState({ reviews })
+        var reviews = resp['results'].map(r => {
+          var review = {movie_name: r["display_title"],
+            link: r["link"], summary: r["summary_short"]}
+          return review;
+        })
+        this.setState({ reviews })
       });
   }
 
