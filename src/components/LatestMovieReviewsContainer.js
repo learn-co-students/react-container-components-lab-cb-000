@@ -16,8 +16,7 @@ class LatestMovieReviewsContainer extends Component {
   }
 
   fetchReviews = () => {
-    //TODO:fetch reviews and manipulate them into tidy arrays
-      //store those array in this.state.reviews:
+    
     fetch(URL)
 	    .then(function(response) {
 		     if (response.status >= 400) { throw new Error("Bad response from server"); }

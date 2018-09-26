@@ -30,8 +30,7 @@ class SearchableMovieReviewsContainer extends {
 
   fetchReviews = (searchTerm=null) => {
     const FULL_URL = !!searchTerm ? URL + `?query=${searchTerm}` : URL
-    //fetch reviews and manipulate them into tidy arrays
-    //store those array in this.state.reviews:
+    
     fetch(FULL_URL)
 	    .then(function(response) {
 		     if (response.status >= 400) { throw new Error("Bad response from server"); }
