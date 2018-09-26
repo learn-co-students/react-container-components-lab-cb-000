@@ -36,9 +36,9 @@ class SearchableMovieReviewsContainer extends Component {
              link: r["link"], summary: r["summary_short"]}
            return review;
          })
+         console.log("Searchable Reviews Arr")
+         console.log(reviews_arr);
          reviews = reviews_arr;
-         console.log("Reviews");
-         console.log(reviews);
       });
       this.setState({ reviews: reviews })
   }

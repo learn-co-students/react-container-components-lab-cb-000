@@ -11,7 +11,8 @@ class LatestMovieReviewsContainer extends Component {
   constructor() {
     super()
     this.state = {
-      reviews: this.fetchReviews()
+      reviews: this.fetchReviews(),
+      state: [{movie_name: "Latest Google", summary: "It's not actually a movie ...", link: 'https://www.google.com'}]
     }
   }
 
@@ -23,17 +24,16 @@ class LatestMovieReviewsContainer extends Component {
 		     return response.json();
 	    })
 	    .then(function(resp) {
-        var reviews_arr = resp['results'].map(r => {
-          var review = {movie_name: r["display_title"],
-            link: r["link"], summary: r["summary_short"]}
-
-          return review;
-        })
-        console.log("Reviews Arr")
+          var reviews_arr = [];
+          resp['results'].forEach(r => {
+            var review = {movie_name: r["display_title"], link: r["link"], summary: r["summary_short"]}
+            reviews_arr.push(review)
+          });
+        console.log("Latest Reviews Arr")
         console.log(reviews_arr);
         reviews = reviews_arr;
       });
-      console.log("Reviews")
+      console.log("Latest Reviews")
       console.log(reviews)
       return reviews
   }

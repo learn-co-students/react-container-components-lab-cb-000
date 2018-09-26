@@ -1,6 +1,9 @@
 import React from 'react';
+
 const MovieReviews = (props) => {
+  console.log("MovieReviews props:");
   console.log(props);
+  // [{movie_name: "Latest Google", summary: "It's not actually a movie ...", link: 'https://www.google.com'}]
   const reviews = props.reviews.map(r => {
    return (
      <div className="review">
@@ -12,12 +15,14 @@ const MovieReviews = (props) => {
      </div>
    )
   })
-  console.log("Render Attempted");
+
   return (
    <div className="review-list">
     {reviews}
    </div>
   )
 }
+
+MovieReviews.defaultProps = {reviews:[{movie_name: "Latest Google", summary: "It's not actually a movie ...", link: 'https://www.google.com'}]};
 
 export default MovieReviews
