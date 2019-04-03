@@ -51,5 +51,4 @@ describe('<LatestMovieReviewsContainer />', () => {
     wrapper.update();
     expect(wrapper.find('.review').length).to.equal(testReviews.length);
   });
-
 });
